@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+gem 'rack'
+gem 'rake'
+gem 'sprockets'
+gem 'sass'
+gem 'haml'
+gem 'coffee-script'
+gem 'byebug'

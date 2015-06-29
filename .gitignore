@@ -1,0 +1,6 @@
+/log
+/.bundle
+/vendor/bundle
+/tmp
+*.cache
+
