@@ -31,10 +31,6 @@ class Foo
     @manifest.compile(asset_paths)
   end
 
-  def clean
-    @manifest.compile(asset_paths)
-  end
-
   def clobber
     @manifest.clobber
   end

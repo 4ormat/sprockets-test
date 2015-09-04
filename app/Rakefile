@@ -9,14 +9,9 @@ task :precompile do
   foo.precompile
 end
 
-desc "clean"
-task :clean do
-  foo = Foo.new
-  foo.clean
-end
-
 desc "clobber"
 task :clobber do
   foo = Foo.new
   foo.clobber
+  puts `rm -rfv ./tmp`
 end
