@@ -11,6 +11,8 @@ class Foo
 
   def initialize
     @use_dependency = ENV['USE_DEPENDENCY'] != '0'
+    @use_symlink = ENV['USE_SYMLINK'] != '0'
+    @dependency_symlink = File.expand_path("../dependency_link", __FILE__)
 
     @assets = Sprockets::Environment.new
     @assets.append_path 'assets/images'
@@ -23,6 +25,8 @@ class Foo
     @manifest = Sprockets::Manifest.new(@assets, @output)
 
     @assets.cache = Sprockets::Cache::FileStore.new('tmp/cache')
+
+    
 
     @logger = Logger.new($stderr)
     @assets.logger = @logger
@@ -37,12 +41,19 @@ class Foo
     @asset_paths ||= @assets.paths.map{|path| @assets.entries(path)}.flatten
   end
 
-  def precompile
-    if @use_dependency
+  def precompile(use_dependency = @use_dependency, use_symlink = @use_symlink)
+    if use_dependency
       create_dependency_in_random_dir do |dir|
-        require File.expand_path(dir + '/dependency.rb')
+        if use_symlink
+          File.symlink dir, @dependency_symlink
+          require File.expand_path(@dependency_symlink + '/dependency.rb')
+        else
+          require File.expand_path(dir + '/dependency.rb')
+        end
         @assets.append_path Dependency::ASSET_DIR
         @manifest.compile(asset_paths)
+
+        FileUtils.rm_r(@dependency_symlink) if use_symlink
       end
     else
       @manifest.compile(asset_paths)
