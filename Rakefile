@@ -15,7 +15,7 @@ end
 
 desc "test"
 task :test do
-  # clobber any cache
+  # remove precompile cache
   clobber
 
   Benchmark.bm do |x|
@@ -35,6 +35,7 @@ task :test do
       end
     end
 
+    # remove precompile cache
     clobber
 
     x.report "precompile switching app dir w/ dependency 1" do
