@@ -4,7 +4,7 @@ require './foo.rb'
 
 desc "precompile"
 task :precompile do
-  print "precompiling..."
+  # print "precompiling..."
   foo = Foo.new
   foo.precompile
 end
@@ -13,5 +13,5 @@ desc "clobber"
 task :clobber do
   foo = Foo.new
   foo.clobber
-  puts `rm -rfv ./tmp`
+  `rm -rf ./tmp`
 end
