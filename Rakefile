@@ -55,3 +55,10 @@ task :test do
     end
   end
 end
+
+desc "test precompile"
+task :test_precompile do
+  Dir.chdir './app' do
+    `bundle exec rake precompile`
+  end
+end
