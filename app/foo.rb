@@ -17,7 +17,9 @@ class Foo
     @assets = Sprockets::Environment.new
     @assets.append_path 'assets/images'
     @assets.append_path 'assets/javascripts'
-    @assets.append_path 'assets/stylesheets'
+    @assets.append_path 'assets/javascripts/req1'
+    @assets.append_path 'assets/javascripts/req2'
+    @assets.append_path 'assets/javascripts/shared'
     @assets.append_path 'assets/stylesheets'
 
     @output = 'public/static'

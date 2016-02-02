@@ -59,6 +59,6 @@ end
 desc "test precompile"
 task :test_precompile do
   Dir.chdir './app' do
-    `bundle exec rake precompile`
+    `bundle exec rake clobber precompile && ls -al app/public/static/`
   end
 end
