@@ -2,6 +2,7 @@ require 'sprockets'
 require 'tmpdir'
 require 'fileutils'
 require 'byebug'
+require 'sass'
 
 class Foo
   attr :assets
@@ -21,6 +22,7 @@ class Foo
     @assets.append_path 'assets/javascripts/req2'
     @assets.append_path 'assets/javascripts/shared'
     @assets.append_path 'assets/stylesheets'
+    @assets.append_path 'assets/stylesheets/landing_pages/creative_people'
 
     @output = 'public/static'
 
@@ -28,6 +30,7 @@ class Foo
 
     @assets.cache = Sprockets::Cache::FileStore.new('tmp/cache')
 
+    Sass.load_paths << 'assets/stylesheets/'
     
 
     @logger = Logger.new($stderr)
